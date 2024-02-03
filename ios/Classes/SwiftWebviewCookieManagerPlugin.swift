@@ -135,8 +135,8 @@ public class SwiftWebviewCookieManagerPlugin: NSObject, FlutterPlugin {
             }
 
             NSLog("Printing cookieList before returning:")
-            for case let cookieDict as [String: Any] in cookieList {
-                NSLog(cookieDict)
+            cookieList.forEach { cdict in
+                NSLog(cdict)
             }
                                         
             result(cookieList)
