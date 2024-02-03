@@ -133,11 +133,6 @@ public class SwiftWebviewCookieManagerPlugin: NSObject, FlutterPlugin {
             cookies.forEach{ cookie in 
                 cookieList.add(_cookieToDictionary(cookie: cookie))
             }
-
-            NSLog("Printing cookieList before returning:")
-            cookieList.forEach { cdict in
-                NSLog(cdict)
-            }
                                         
             result(cookieList)
         }
