@@ -1,3 +1,9 @@
+# Changes in this fork
+- Pulled in pending pull requests from the original repo:
+  - [Add Flush on Android](https://github.com/m-ochyra/webview_cookie_manager/tree/feature/add-flush-for-android)
+  - [Add support for AGP 8](https://github.com/fryette/webview_cookie_manager/pull/66)
+- Use a more lenient Cookie class instead of the dart:io one, since some websites don't follow Cookie conventions and use disallowed characters like quotes. The dart Cookie class throws a format exception in that case, which would mean that we lose those cookies, which is not acceptable, since the Android & iOS WebView are fine with quotes in the cookie values. We assume Android and iOS already validated the Cookie, so we don't validate it anymore in the LaxCookie class.
+
 # Webview Cookie Manager
 [![pub package](https://img.shields.io/pub/v/webview_cookie_manager.svg)](https://pub.dartlang.org/packages/webview_cookie_manager)
 

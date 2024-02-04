@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 
+import 'lax_cookie.dart';
+
 class WebviewCookieManager {
   static const _channel = MethodChannel('webview_cookie_manager');
 
@@ -31,7 +33,7 @@ class WebviewCookieManager {
                 .map((Map result) {
                   Cookie? c;
                   try {
-                    c = Cookie(result['name'] ?? '',
+                    c = LaxCookie(result['name'] ?? '',
                         removeInvalidCharacter(result['value'] ?? ''))
                       // following values optionally work on iOS only
                       ..path = result['path']
@@ -43,7 +45,8 @@ class WebviewCookieManager {
                       c.expires = DateTime.fromMillisecondsSinceEpoch(
                           (result['expires'] * 1000).toInt());
                     }
-                  } on FormatException catch (_) {
+                  } on FormatException catch (e) {
+                    print('WebviewCookieManager: Error parsing cookie: $e');
                     c = null;
                   }
                   return c;
